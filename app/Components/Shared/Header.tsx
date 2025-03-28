@@ -28,8 +28,8 @@ const Header = () => {
           </div>
           
           <div>
-            <button className="relative inline-flex items-center px-8 py-1 overflow-hidden text-lg font-medium text-primary border-2 border-primary rounded-full hover:text-white group hover:bg-[#A72424]">
-              <span className="absolute left-0 block w-full h-0 transition-all bg-primary opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
+            <button className="relative inline-flex items-center px-8 py-1 overflow-hidden text-lg font-medium  border-2  rounded-full hover:text-white group hover:bg-[#A72424]">
+              <span className="absolute left-0 block w-full h-0 transition-all  opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
               <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
                 <svg
                   className="w-5 h-5"

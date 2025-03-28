@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+body {
+  background-color: #1B1B1B; /* Set background color to #1B1B1B */
+}
 
 .font-title {
   font-family: var(--font-crimson-pro), serif;
