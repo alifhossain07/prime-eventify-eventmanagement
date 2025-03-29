@@ -13,7 +13,7 @@
         "availableTicket": 3000,
         "featuredEvent": true,
         "upcomingEvent": false,
-        "image": "https://example.com/images/stormriders_concert.jpg"
+        "image": "https://i.ibb.co.com/ks9JVQdS/concert1.webp"
     },
     {
         "id": 2,
@@ -29,7 +29,7 @@
         "availableTicket": 2000,
         "featuredEvent": false,
         "upcomingEvent": true,
-        "image": "https://example.com/images/legendary_bands.jpg"
+        "image": "https://i.ibb.co.com/Rk2W8NvJ/concert3.webp"
     },
     {
         "id": 3,
@@ -45,7 +45,7 @@
         "availableTicket": 1500,
         "featuredEvent": true,
         "upcomingEvent": true,
-        "image": "https://example.com/images/echoes_concert.jpg"
+        "image": "https://i.ibb.co.com/BX93g2r/concert4.webp"
     },
     {
         "id": 4,
@@ -61,7 +61,7 @@
         "availableTicket": 8000,
         "featuredEvent": false,
         "upcomingEvent": true,
-        "image": "https://example.com/images/summer_vibes_festival.jpg"
+        "image": "https://i.ibb.co.com/jPv2gqcT/concert2.webp"
     },
     {
         "id": 5,
@@ -77,7 +77,7 @@
         "availableTicket": 40000,
         "featuredEvent": true,
         "upcomingEvent": false,
-        "image": "https://example.com/images/champions_league_final.jpg"
+        "image": "https://i.ibb.co.com/2Ygb4VBf/championsleague.webp"
     },
     {
         "id": 6,
@@ -109,7 +109,7 @@
         "availableTicket": 20000,
         "featuredEvent": true,
         "upcomingEvent": true,
-        "image": "https://example.com/images/grand_prix_racing.jpg"
+        "image": "https://i.ibb.co.com/BKnbbcGX/grandprix.webp"
     },
     {
         "id": 8,
@@ -125,7 +125,7 @@
         "availableTicket": 10000,
         "featuredEvent": false,
         "upcomingEvent": true,
-        "image": "https://example.com/images/tennis_masters.jpg"
+        "image": "https://i.ibb.co.com/mF5j5JDH/Tennis.webp"
     },
     {
         "id": 9,
@@ -141,7 +141,7 @@
         "availableTicket": 300,
         "featuredEvent": true,
         "upcomingEvent": false,
-        "image": "https://example.com/images/digital_marketing_workshop.jpg"
+        "image": "https://i.ibb.co.com/Z6pcKbWd/digitalmarketinng.webp"
     },
     {
         "id": 10,
@@ -157,7 +157,7 @@
         "availableTicket": 150,
         "featuredEvent": false,
         "upcomingEvent": true,
-        "image": "https://example.com/images/photography_masterclass.jpg"
+        "image": "https://i.ibb.co.com/gMzwYc8N/photography.webp"
     },
     {
         "id": 11,
@@ -173,7 +173,7 @@
         "availableTicket": 50,
         "featuredEvent": true,
         "upcomingEvent": true,
-        "image": "https://example.com/images/wellness_retreat.jpg"
+        "image": "https://i.ibb.co.com/zTrx4YWy/wellness.webp"
     },
     {
         "id": 12,
@@ -189,7 +189,7 @@
         "availableTicket": 200,
         "featuredEvent": false,
         "upcomingEvent": true,
-        "image": "https://example.com/images/coding_bootcamp.jpg"
+        "image": "https://i.ibb.co.com/gb9TSP9K/codingbootcamp.webp"
     },
     {
         "id": 13,
@@ -205,7 +205,7 @@
         "availableTicket": 15000,
         "featuredEvent": true,
         "upcomingEvent": false,
-        "image": "https://example.com/images/spring_festival.jpg"
+        "image": "https://i.ibb.co.com/dC7GYBV/springfestival.webp"
     },
     {
         "id": 14,
@@ -221,7 +221,7 @@
         "availableTicket": 4000,
         "featuredEvent": false,
         "upcomingEvent": true,
-        "image": "https://example.com/images/music_fiesta.jpg"
+        "image": "https://i.ibb.co.com/wrrktY4W/musicfiesta.webp"
     },
     {
         "id": 15,
@@ -237,7 +237,7 @@
         "availableTicket": 8000,
         "featuredEvent": true,
         "upcomingEvent": true,
-        "image": "https://example.com/images/food_festival.jpg"
+        "image": "https://i.ibb.co.com/nsc4gfkk/foodfestival.webp"
     },
     {
         "id": 16,
@@ -253,6 +253,6 @@
         "availableTicket": 30000,
         "featuredEvent": false,
         "upcomingEvent": true,
-        "image": "https://example.com/images/new_years_eve_bash.jpg"
+        "image": "https://i.ibb.co.com/whRZHfGm/newyear.webp"
     }
 ]
