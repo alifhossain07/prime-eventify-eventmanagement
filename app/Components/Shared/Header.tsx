@@ -21,7 +21,7 @@ const Header = () => {
           </div>
           <div className="relative md:flex hidden">
             <input
-              className="py-1.5 pr-4 border-2 w-80 text-black border-text pl-10 rounded-full outline-none focus:border-2 focus:border-[#A72424]"
+              className="py-1.5 pr-4 border-2 w-80 bg-gray-100 text-black border-text pl-10 rounded-full outline-none focus:border-2 focus:border-[#A72424]"
               placeholder="Find Event by Category. eg. music"
             />
             <IoIosSearch className="absolute top-[9px] left-3 text-[#424242] text-[1.3rem]" />
@@ -39,9 +39,9 @@ const Header = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M14 5l7 7m0 0l-7 7m7-7H3"
                   ></path>
                 </svg>

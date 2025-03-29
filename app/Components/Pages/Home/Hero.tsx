@@ -13,9 +13,9 @@ const Hero = () => {
         }}
       >
         <div className="hero-overlay"></div>
-        <div className="bg-black/70 absolute left-48 text-white px-20 py-16 border-radius ">
-            <h1 className="text-center mb-10 text-3xl font-title2">Plan Your <span className="text-red-500">Perfect Event</span></h1>
-            <div className="flex font-text gap-10 ">
+        <div className="bg-black/70 absolute left-56 text-white px-16 py-16 border-radius ">
+            <h1 className="text-center mb-10 text-3xl font-title2 tracking-wider">Plan Your <span className="text-red-500">Perfect Event</span></h1>
+            <div className="flex tracking-wider font-text gap-10 ">
                 <div className="flex flex-col items-center gap-4">
                 <FaCalendarAlt className="text-red-500 text-5xl" />
                     <h1>Event Scheduling</h1>
