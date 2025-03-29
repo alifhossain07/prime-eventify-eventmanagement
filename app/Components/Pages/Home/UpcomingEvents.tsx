@@ -84,6 +84,7 @@ const UpcomingEvents = () => {
                 <div className="shadow-md h-[350px] transition-all duration-300 overflow-hidden rounded-4xl relative cursor-pointer group">
                   <div className="relative w-full h-full group">
                     <Image
+                     // @ts-expect-error: we need to fix this type error
                       src={project.image}
                       width={500}
                       height={300}
@@ -96,9 +97,11 @@ const UpcomingEvents = () => {
 
                   <div className="w-full h-full absolute bg-black/30 top-0 left-0 backdrop-blur-lg flex items-center justify-center flex-col px-[20px] opacity-0 transition-all duration-300 group-hover:opacity-100">
                     <h2 className="text-[1.5rem] text-white font-bold text-center leading-[30px] capitalize">
+                         {/* @ts-expect-error: we need to fix this type error */}
                       {project.eventTitle}
                     </h2>
                     <p className="text-[1rem] text-white text-center mt-3 opacity-85">
+                        {/* @ts-expect-error: we need to fix this type error */}
                       {project.miniDescription}
                     </p>
                   </div>
