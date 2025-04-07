@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Crimson_Pro, Cutive, Croissant_One, Cantata_One, Bungee } from "next/font/google";
 import "./globals.css";
 import Header from "./Components/Shared/Header";
+import Footer from "./Components/Shared/Footer";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -54,6 +55,7 @@ export default function RootLayout({
       >
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

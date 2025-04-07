@@ -1,6 +1,8 @@
 [
     {
         "id": 1,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Electric Storm Concert",
         "miniDescription": "Experience the electrifying performance by Storm Riders at the iconic Downtown Arena.",
         "DetailedDescription": "Join us for an unforgettable night of music as Storm Riders take the stage at Downtown Arena. With their unique blend of rock and electronic music, they promise to deliver an electrifying performance that will leave you breathless. Doors open at 6 PM.",
@@ -17,6 +19,8 @@
     },
     {
         "id": 2,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Rise of the Legends",
         "miniDescription": "Witness the epic battle of sounds as legendary bands unite for one night only at the Music Hall.",
         "DetailedDescription": "Get ready for a musical extravaganza as some of the most iconic bands come together for a night of pure magic at the Music Hall. This is a once-in-a-lifetime opportunity to see your favorite legends perform together. Don't miss out!",
@@ -33,6 +37,8 @@
     },
     {
         "id": 3,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Echoes in the Night",
         "miniDescription": "Immerse yourself in the mesmerizing melodies of Echoes at the prestigious Opera House.",
         "DetailedDescription": "Step into the enchanting world of Echoes as they perform their critically acclaimed album at the Opera House. Known for their ethereal soundscapes, this concert promises to be a truly immersive experience.",
@@ -49,6 +55,8 @@
     },
     {
         "id": 4,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Summer Vibes Festival",
         "miniDescription": "Kick off summer with a bang at the Summer Vibes Festival featuring top artists at the Beachside Park.",
         "DetailedDescription": "Welcome the summer season with a blast at the Summer Vibes Festival. Enjoy a day filled with music, food, and fun as top artists take the stage at Beachside Park. Don't miss this ultimate summer kick-off party!",
@@ -65,6 +73,8 @@
     },
     {
         "id": 5,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Champions League Final",
         "miniDescription": "Watch the thrilling finale of the Champions League live at the Stadium of Dreams.",
         "DetailedDescription": "Be part of the electric atmosphere as the best teams in Europe clash in the Champions League Final at the Stadium of Dreams. Secure your spot to witness history in the making!",
@@ -81,6 +91,8 @@
     },
     {
         "id": 6,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "NBA Playoffs",
         "miniDescription": "Catch the action-packed NBA Playoffs live at the Downtown Stadium.",
         "DetailedDescription": "Experience the intensity of the NBA Playoffs as top teams battle it out at the Downtown Stadium. Don't miss this thrilling opportunity to see your favorite players in action.",
@@ -97,6 +109,8 @@
     },
     {
         "id": 7,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Grand Prix Racing",
         "miniDescription": "Feel the rush of adrenaline at the Grand Prix Racing event at the Speedway Circuit.",
         "DetailedDescription": "Get ready for high-speed action as the world's top drivers compete in the Grand Prix Racing event at the Speedway Circuit. Witness the thrill of racing up close!",
@@ -113,6 +127,8 @@
     },
     {
         "id": 8,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Tennis Masters",
         "miniDescription": "Watch the world's best tennis players in action at the Tennis Masters tournament at the Tennis Arena.",
         "DetailedDescription": "Experience the skill and strategy of top tennis players as they compete in the Tennis Masters tournament at the Tennis Arena. Secure your spot to witness some of the greatest matches in tennis history.",
@@ -129,6 +145,8 @@
     },
     {
         "id": 9,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Digital Marketing Workshop",
         "miniDescription": "Enhance your digital marketing skills with expert insights at the Downtown Conference Center.",
         "DetailedDescription": "Join us at the Downtown Conference Center for a comprehensive workshop on digital marketing. Learn from industry experts and take your marketing strategies to the next level.",
@@ -145,6 +163,8 @@
     },
     {
         "id": 10,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Photography Masterclass",
         "miniDescription": "Unlock your photography potential with a masterclass by renowned photographer, Alex Smith, at the Art Gallery.",
         "DetailedDescription": "Improve your photography skills with a hands-on masterclass led by the acclaimed photographer, Alex Smith, at the Art Gallery. Learn techniques to capture stunning images and elevate your art.",
@@ -161,6 +181,8 @@
     },
     {
         "id": 11,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Wellness Retreat",
         "miniDescription": "Find inner peace and rejuvenate at the Wellness Retreat in the serene surroundings of Nature's Haven.",
         "DetailedDescription": "Escape to Nature's Haven for a holistic wellness retreat. Enjoy yoga, meditation, and healthy living workshops designed to nourish both body and soul.",
@@ -177,6 +199,8 @@
     },
     {
         "id": 12,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Coding Bootcamp",
         "miniDescription": "Transform into a coding pro with our intensive bootcamp at the Tech Hub.",
         "DetailedDescription": "Join our comprehensive coding bootcamp at the Tech Hub and gain the skills needed to succeed in the tech industry. Learn from experienced instructors and work on real-world projects.",
@@ -193,6 +217,8 @@
     },
     {
         "id": 13,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Spring Festival",
         "miniDescription": "Celebrate the arrival of spring with vibrant performances and delicious food at the City Park.",
         "DetailedDescription": "Welcome spring with a bang at the Spring Festival held at City Park. Enjoy live music, cultural performances, and a variety of cuisines from around the world.",
@@ -209,6 +235,8 @@
     },
     {
         "id": 14,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Music Fiesta",
         "miniDescription": "Dance the night away with top DJs at the Music Fiesta in the vibrant Beachside Venue.",
         "DetailedDescription": "Get ready to groove at the Music Fiesta, featuring some of the world's top DJs at the Beachside Venue. Enjoy a night of non-stop music and fun with friends.",
@@ -225,6 +253,8 @@
     },
     {
         "id": 15,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "Food Festival",
         "miniDescription": "Indulge in a culinary journey with dishes from around the globe at the Food Festival in the Downtown Plaza.",
         "DetailedDescription": "Savor the flavors of the world at the Food Festival held in the Downtown Plaza. From spicy curries to savory pastas, enjoy a gastronomic adventure like no other.",
@@ -241,6 +271,8 @@
     },
     {
         "id": 16,
+        "userEmail": "alifhossain56782@gmail.com",
+        "userName": "Alif Hossain",
         "eventTitle": "New Year's Eve Bash",
         "miniDescription": "Ring in the new year with fireworks and live music at the iconic Times Square.",
         "DetailedDescription": "Celebrate the start of a new year in style at the New Year's Eve Bash in Times Square. Enjoy spectacular fireworks and performances by renowned artists.",
