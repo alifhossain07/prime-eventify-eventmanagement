@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "@/public/images/LogoUnic.png";
 import Image from "next/image";
 import { IoIosSearch } from "react-icons/io";
+import Link from "next/link";
 const Header = () => {
   return (
     <div className="bg-black text-white">
@@ -14,7 +15,8 @@ const Header = () => {
         <div className="flex items-center gap-10">
         <div className="">
             <ul className="flex items-center font-title2 text-xl tracking-wide gap-8 ">
-              <li className="hover:text-red-400 cursor-pointer">Home</li>
+              <Link href="/"> <li className="hover:text-red-400 cursor-pointer">Home</li></Link>
+             
               <li className="hover:text-red-400 cursor-pointer">About Us</li>
               <li className="hover:text-red-400 cursor-pointer">Events</li>
             </ul>
@@ -28,7 +30,8 @@ const Header = () => {
           </div>
           
           <div>
-            <button className="relative inline-flex items-center px-8 py-1 overflow-hidden text-lg font-medium  border-2  rounded-full hover:text-white group hover:bg-[#A72424]">
+            <Link href="/login">
+            <button className="relative cursor-pointer inline-flex items-center px-8 py-1 overflow-hidden text-lg font-medium  border-2  rounded-full hover:text-white group hover:bg-[#A72424]">
               <span className="absolute left-0 block w-full h-0 transition-all  opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
               <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
                 <svg
@@ -50,6 +53,7 @@ const Header = () => {
                 Sign In
               </span>
             </button>
+            </Link>
           </div>
         </div>
       </div>
