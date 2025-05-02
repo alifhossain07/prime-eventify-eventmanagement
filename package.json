@@ -18,6 +18,7 @@
     "bcryptjs": "^3.0.2",
     "daisyui": "^5.0.9",
     "mongodb": "^6.16.0",
+    "mongoose": "^8.14.1",
     "next": "14.2.26",
     "next-auth": "^4.24.11",
     "react": "^18",
