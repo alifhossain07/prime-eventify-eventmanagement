@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+
 import { Montserrat, Crimson_Pro, Cutive, Croissant_One, Cantata_One, Bungee } from "next/font/google";
 import "./globals.css";
 import Header from "./Components/Shared/Header";
 import Footer from "./Components/Shared/Footer";
-
+import {
+  ClerkProvider,
+  
+} from '@clerk/nextjs'
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
@@ -49,14 +53,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en" data-theme="light" suppressHydrationWarning>
       <body
         className={`${montserrat.variable} ${crimsonPro.variable} ${cutive.variable} ${croissantOne.variable} ${cantataOne.variable} ${bungee.variable} antialiased`}
       >
+        
         <Header />
         {children}
         <Footer />
-      </body>
+             </body>
     </html>
+    </ClerkProvider>
   );
 }

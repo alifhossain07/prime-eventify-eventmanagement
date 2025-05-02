@@ -1,8 +1,11 @@
+"use client";
 import React from "react";
 import Logo from "@/public/images/LogoUnic.png";
 import Image from "next/image";
 import { IoIosSearch } from "react-icons/io";
 import Link from "next/link";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+
 const Header = () => {
   return (
     <div className="bg-black text-white">
@@ -30,30 +33,36 @@ const Header = () => {
           </div>
           
           <div>
-            <Link href="/login">
-            <button className="relative cursor-pointer inline-flex items-center px-8 py-1 overflow-hidden text-lg font-medium  border-2  rounded-full hover:text-white group hover:bg-[#A72424]">
-              <span className="absolute left-0 block w-full h-0 transition-all  opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
-              <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  ></path>
-                </svg>
-              </span>
-              <span className="relative text-[1rem] group-hover:pr-4 font-title2 text-lg transition-all duration-400">
-                Sign In
-              </span>
-            </button>
-            </Link>
+          <SignedOut>
+  <Link href="/sign-in">
+    <button className="relative cursor-pointer inline-flex items-center px-8 py-1 overflow-hidden text-lg font-medium  border-2  rounded-full hover:text-white group hover:bg-[#A72424]">
+      <span className="absolute left-0 block w-full h-0 transition-all  opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
+      <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M14 5l7 7m0 0l-7 7m7-7H3"
+          ></path>
+        </svg>
+      </span>
+      <span className="relative text-[1rem] group-hover:pr-4 font-title2 text-lg transition-all duration-400">
+        Sign In
+      </span>
+    </button>
+  </Link>
+</SignedOut>
+
+<SignedIn>
+  <UserButton />
+</SignedIn>
           </div>
         </div>
       </div>
