@@ -20,8 +20,9 @@ const Header = () => {
             <ul className="flex items-center font-title2 text-xl tracking-wide gap-8 ">
               <Link href="/"> <li className="hover:text-red-400 cursor-pointer">Home</li></Link>
              
-              <li className="hover:text-red-400 cursor-pointer">About Us</li>
-              <li className="hover:text-red-400 cursor-pointer">Events</li>
+              <Link href="/aboutus"> <li className="hover:text-red-400 cursor-pointer">About Us</li></Link>
+             
+              <Link href="/events"> <li className="hover:text-red-400 cursor-pointer">Events</li></Link>
             </ul>
           </div>
           <div className="relative md:flex hidden">
