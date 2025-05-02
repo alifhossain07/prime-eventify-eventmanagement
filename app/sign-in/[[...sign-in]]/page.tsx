@@ -1,5 +1,5 @@
 import Image from 'next/image';
-// import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
 import LoginImage from '@/public/images/login.webp'; // Adjust the path as necessary
 import { SignIn } from '@clerk/nextjs'
@@ -19,9 +19,11 @@ const SignInPage = () => {
         </div>
   
         {/* Right Section: Login Form */}
-        <div className="w-1/2 flex items-center justify-center bg-#1b1b1b]">
+        <div className="w-1/2 flex flex-col items-center justify-center bg-#1b1b1b]">
         <SignIn />
+        <p className='text-white mt-6 text-xl font-text'>Dont Have an Account? <Link href="/sign-up" className='text-red-500'>Sign up!</Link></p>
         </div>
+        
       </div>
     );
 };
