@@ -1,4 +1,6 @@
-import {clerkClient} from "@clerk/nextjs";
+/* eslint-disable */
+
+// import {clerkClient} from "@clerk/nextjs";
 import {NextResponse} from "next/server";
 import {Webhook} from "svix";
 import { WebhookEvent } from "@clerk/nextjs/server";
@@ -14,3 +16,4 @@ export async function POST(req: Request) {
 
 
 }
+
