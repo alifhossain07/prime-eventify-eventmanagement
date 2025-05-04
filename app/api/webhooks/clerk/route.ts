@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 import { createUser } from "@/lib/actions/user.action";
 
 export async function POST(request: Request) {
-  // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
@@ -32,7 +31,6 @@ export async function POST(request: Request) {
 
   // Create a new Svix instance with your secret.
   const wh = new Webhook(WEBHOOK_SECRET);
-
   let evt: WebhookEvent;
 
   // Verify the payload with the headers
@@ -53,38 +51,40 @@ export async function POST(request: Request) {
   const { id } = evt.data;
   const eventType = evt.type;
 
-//   Create user in mongoDB
-   if (eventType === "user.created") {
-    
-    const {id, email_addresses, image_url, first_name, last_name, username} = evt.data;
+  // Create user in MongoDB
+  if (eventType === "user.created") {
+    const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
 
     const user = {
-        clerkId: id,
-        email: email_addresses[0].email_address,
-        username: username!,
-        photo: image_url,
-        firstName: first_name,
-        lastName: last_name,
-    }
+      clerkId: id,
+      email: email_addresses[0].email_address,
+      username: username!,
+      photo: image_url,
+      firstName: first_name,
+      lastName: last_name,
+    };
+
     console.log("User created:", user);
 
-    const newUser = await createUser(user);
+    try {
+      const newUser = await createUser(user);
 
-    if(newUser){
+      if (newUser) {
         // @ts-expect-error:mylifemyrules
         await clerkClient.users.updateUserMetadata(id, {
-            publicMetadata: {
-                userId: newUser._id,
-            },
+          publicMetadata: {
+            userId: newUser._id,
+          },
         });
+
+        return NextResponse.json({ message: "User created successfully", user: newUser });
+      }
+    } catch (error) {
+      console.error("Error in webhook handler:", error);
+      return new NextResponse("Error creating user", { status: 500 });
     }
+  }
 
-    return NextResponse.json({message: "User created successfully", user: newUser} );
-}
-
- 
   console.log(`Webhook with ID ${id} and type of ${eventType}`);
-  console.log("Webhook body:", body);
-
   return new NextResponse("", { status: 200 });
 }
