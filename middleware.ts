@@ -12,8 +12,8 @@ const isPublicRoute = createRouteMatcher([
 
 export default clerkMiddleware((auth, req) => {
   if (isPublicRoute(req)) return; // Skip auth for public routes
-  // @ts-expect-error:mylifemyrules
-  auth().protect();               // Require auth for everything else
+ 
+                // Require auth for everything else
 });
 
 export const config = {
