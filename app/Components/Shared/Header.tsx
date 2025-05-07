@@ -4,7 +4,6 @@ import Logo from "@/public/images/LogoUnic.png";
 import Image from "next/image";
 import { IoIosSearch } from "react-icons/io";
 import Link from "next/link";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const Header = () => {
   return (
@@ -34,7 +33,7 @@ const Header = () => {
           </div>
           
           <div>
-          <SignedOut>
+          
   <Link href="/sign-in">
     <button className="relative cursor-pointer inline-flex items-center px-8 py-1 overflow-hidden text-lg font-medium  border-2  rounded-full hover:text-white group hover:bg-[#A72424]">
       <span className="absolute left-0 block w-full h-0 transition-all  opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
@@ -59,11 +58,9 @@ const Header = () => {
       </span>
     </button>
   </Link>
-</SignedOut>
 
-<SignedIn>
-  <UserButton />
-</SignedIn>
+
+
           </div>
         </div>
       </div>
