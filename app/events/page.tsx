@@ -1,96 +1,114 @@
-'use client';
+// app/events/page.tsx
 
-import React from "react";
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useUser } from "@clerk/nextjs";
+import Image from "next/image";
 
-const events = [
-  {
-    id: 1,
-    title: "Music Mania Festival 2025",
-    category: "Music",
-    date: "June 12, 2025",
-    image: "/images/event-music.jpg",
-    location: "Dhaka Arena, Bangladesh",
-  },
-  {
-    id: 2,
-    title: "TechX Conference",
-    category: "Tech",
-    date: "July 7, 2025",
-    image: "/images/event-tech.jpg",
-    location: "Sylhet Innovation Hub",
-  },
-  {
-    id: 3,
-    title: "Women in Business Expo",
-    category: "Business",
-    date: "August 22, 2025",
-    image: "/images/event-business.jpg",
-    location: "Chattogram Expo Center",
-  },
-];
+interface Event {
+  id: number;
+  userEmail: string;
+  userName: string;
+  eventTitle: string;
+  miniDescription: string;
+  DetailedDescription: string;
+  date: string;
+  time: string;
+  location: string;
+  capacity: number;
+  category: string;
+  ticketPrice: number;
+  availableTicket: number;
+  featuredEvent: boolean;
+  upcomingEvent: boolean;
+  image: string;
+}
 
-const EventsPage = () => {
-  const { user, isSignedIn } = useUser();
+const categories = ["All", "Concerts", "Sports", "Workshops", "Festivals"];
+
+export default function EventsPage() {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/eventdata");
+        const data = await res.json();
+        setEvents(data);
+        setFilteredEvents(data);
+      } catch (error) {
+        console.error("Failed to fetch events:", error);
+      }
+    };
+    fetchEvents();
+  }, []);
+
+  const filterByCategory = (category: string) => {
+    setSelectedCategory(category);
+    if (category === "All") {
+      setFilteredEvents(events);
+    } else {
+      const filtered = events.filter((event) => event.category === category);
+      setFilteredEvents(filtered);
+    }
+  };
 
   return (
-    <main className="bg-white text-black min-h-screen px-6 lg:px-24 py-16">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-title mb-2">Upcoming Events</h1>
-        <p className="text-lg text-gray-600 mb-2">
-          Discover events that match your passions and interests.
-        </p>
-        {isSignedIn && (
-          <p className="text-md text-gray-800 font-medium">
-            Welcome back, <span className="text-[#A72424]">{user?.firstName}</span>!
-          </p>
-        )}
-      </div>
+    <div className="  text-white px-4 py-8">
+      <h1 className="text-4xl font-bold text-center text-red-500 mb-6">
+        All Events
+      </h1>
 
-      {/* Category Buttons */}
-      <div className="flex flex-wrap justify-center gap-4 mb-12">
-        {["All", "Music", "Tech", "Business", "Workshop"].map((cat) => (
+      <div className="flex flex-wrap justify-center gap-4 mb-8">
+        {categories.map((category) => (
           <button
-            key={cat}
-            className="px-6 py-2 rounded-full border border-gray-400 text-gray-700 hover:bg-[#A72424] hover:text-white transition-all"
+            key={category}
+            onClick={() => filterByCategory(category)}
+            className={`px-4 py-2 rounded-full border text-sm font-semibold transition-colors duration-300 ${
+              selectedCategory === category
+                ? "bg-red-600 text-white border-red-600"
+                : "bg-gray-800 text-gray-300 border-gray-600 hover:bg-red-700 hover:text-white"
+            }`}
           >
-            {cat}
+            {category}
           </button>
         ))}
       </div>
 
-      {/* Events List */}
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        {events.map((event) => (
+      <div className="grid w-10/12 mx-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {filteredEvents.map((event) => (
           <div
             key={event.id}
-            className="bg-white shadow-lg border border-gray-200 rounded-xl overflow-hidden"
+            className="bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-red-500 transition-shadow"
           >
-            <div className="relative h-52 w-full">
-              <Image
-                src={event.image}
-                alt={event.title}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-5">
-              <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
-              <p className="text-gray-500 text-sm mb-2">{event.date}</p>
-              <p className="text-gray-600 text-sm">{event.location}</p>
-              <Link href={`/events/${event.id}`}>
-                <button className="mt-4 bg-[#A72424] text-white px-5 py-2 rounded-full text-sm hover:bg-red-600">
-                  View Details
-                </button>
+            <Image
+              src={event.image}
+              alt={event.eventTitle}
+              width={500}
+              height={300}
+              className="w-full h-60 object-cover"
+            />
+            <div className="p-4">
+              <h2 className="text-xl font-semibold text-red-400">
+                {event.eventTitle}
+              </h2>
+              <p className="text-sm text-gray-400">Organizer: {event.userName}</p>
+              <p className="mt-1 text-sm text-gray-300">
+                Date: {event.date} | Location: {event.location}
+              </p>
+              <Link
+                href={`/events/${event.id}`}
+                className="inline-block mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+              >
+                View Details
               </Link>
             </div>
           </div>
         ))}
       </div>
-    </main>
+    </div>
   );
-};
-
-export default EventsPage;
+}

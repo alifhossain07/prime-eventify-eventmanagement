@@ -41,7 +41,7 @@ const UpcomingEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("/api/events");
+        const response = await axios.get("http://localhost:5000/eventdata");
         setEvents(response.data);
       } catch (error) {
         console.error(error);
