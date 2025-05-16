@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 interface Event {
   _id?: string;
@@ -34,27 +35,52 @@ export default function OrganizerDashboard() {
     ticketPrice: 0,
     image: "",
   });
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string>("");
 
+  // Listen to Firebase auth state change to get current user
   useEffect(() => {
-    fetchEvents();
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user && user.email) {
+        setUserEmail(user.email);
+        setUserName(user.displayName || "");
+      } else {
+        setUserEmail(null);
+        setUserName("");
+        setEvents([]);
+        setLoading(false);
+      }
+    });
+    return () => unsubscribe();
   }, []);
 
+  // Fetch events when userEmail is available
+  useEffect(() => {
+    if (userEmail) {
+      fetchEvents();
+    }
+  }, [userEmail]);
+
   const fetchEvents = async () => {
+    setLoading(true);
     try {
       const res = await fetch("http://localhost:5000/eventdata");
       const data = await res.json();
+      // Filter events by logged in user email
       const filtered = data.filter(
-        (event: Event) => event.userEmail === "alifhossain56782@gmail.com"
+        (event: Event) => event.userEmail === userEmail
       );
       setEvents(filtered);
     } catch (error) {
       console.error("Fetch error:", error);
+      setEvents([]);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleInput = (e: any) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -74,12 +100,18 @@ export default function OrganizerDashboard() {
     setShowModal(true);
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!userEmail) {
+      alert("User not logged in.");
+      return;
+    }
+
     const newEvent = {
       ...formData,
-      userEmail: "alifhossain56782@gmail.com",
-      userName: "Alif Hossain",
+      userEmail,
+      userName,
       availableTicket: formData.capacity,
     };
 
@@ -120,6 +152,7 @@ export default function OrganizerDashboard() {
       }
     } catch (err) {
       console.error("Submit error:", err);
+      alert("Something went wrong.");
     }
   };
 
@@ -149,6 +182,8 @@ export default function OrganizerDashboard() {
 
       {loading ? (
         <p className="text-center text-gray-400">Loading events...</p>
+      ) : events.length === 0 ? (
+        <p className="text-center text-gray-400">No events found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event, i) => (
@@ -170,7 +205,9 @@ export default function OrganizerDashboard() {
                 <p className="text-gray-400 text-sm">Date: {event.date}</p>
                 <p className="text-gray-400 text-sm">Location: {event.location}</p>
                 <p className="text-sm text-gray-300">Capacity: {event.capacity}</p>
-                <p className="text-sm text-gray-300">Available: {event.availableTicket}</p>
+                <p className="text-sm text-gray-300">
+                  Available: {event.availableTicket}
+                </p>
                 <div className="flex gap-2 mt-3">
                   <button
                     onClick={() => openEditModal(event)}
