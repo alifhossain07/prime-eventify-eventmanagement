@@ -7,11 +7,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
- 
- 
-  
 } from "firebase/auth";
-
 
 import app from '../firebase/config';
 
@@ -19,32 +15,44 @@ export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
 
-
-
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Sign up with email and password, including photoURL
-  const createUser = async (email, password, role, displayName, photoURL) => {
+  // Helper to fetch user role from your backend
+  const fetchUserRole = async (email) => {
+    try {
+      const res = await fetch(`http://localhost:5000/users/getUserRole?email=${encodeURIComponent(email)}`);
+      if (!res.ok) throw new Error("Failed to fetch user role");
+      const data = await res.json();
+      return data.role; // expected: "admin" | "user" | "organizer"
+    } catch (error) {
+      console.error("Error fetching user role:", error);
+      return null;
+    }
+  };
+
+  // Sign up with email and password
+  const createUser = async (email, password, role, displayName) => {
     setLoading(true);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      const newUser = { email, name, photoURL, role: 'user' }; // Default role
+      const newUser = { email, name: displayName, role: role || 'user' }; // Default role or passed role
 
-  // Save newUser to your usersCollection in MongoDB
-  await usersCollection.insertOne(newUser);
-  
-      // Update user profile with display name and photo URL
+      // Save newUser to your backend or database here
+      // await saveUserToDB(newUser); // replace with your actual save function
+
+      // Update user profile with display name (no photoURL anymore)
       await user.updateProfile({
         displayName: displayName,
-        photoURL: photoURL,
       });
-  
-      console.log('User registered:', user);
-      setUser(user);
+
+      const userWithRole = { ...user, role: newUser.role };
+
+      console.log('User registered:', userWithRole);
+      setUser(userWithRole);
     } catch (error) {
       console.error('Error creating user:', error);
     } finally {
@@ -55,36 +63,47 @@ const AuthProvider = ({ children }) => {
   // Sign in with email and password
   const signIn = async (email, password) => {
     setLoading(true);
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const loggedInUser = userCredential.user;
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const loggedInUser = userCredential.user;
 
-    console.log("User logged in:", loggedInUser); // Log user info on successful login
-    setUser(loggedInUser); // Set user state
-    setLoading(false);
+      // Fetch role from backend API
+      const role = await fetchUserRole(loggedInUser.email);
+
+      const userWithRole = { ...loggedInUser, role };
+
+      console.log("User logged in:", userWithRole);
+      setUser(userWithRole);
+    } catch (error) {
+      console.error("Error signing in:", error);
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
   };
-
-  
-  
-  
 
   // Log out
   const logOut = async () => {
     setLoading(true);
     await signOut(auth);
-    console.log("User logged out"); // Log logout action
-    setUser(null); // Clear user state
+    console.log("User logged out");
+    setUser(null);
     setLoading(false);
   };
 
   // Listen to auth state changes
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
+    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        console.log("User state changed:", currentUser); // Log user state changes
+        const role = await fetchUserRole(currentUser.email);
+        const userWithRole = { ...currentUser, role };
+        setUser(userWithRole);
+        setLoading(false);
+        console.log("User state changed:", userWithRole);
       } else {
-        console.log("No user is logged in"); // Log when no user is logged in
+        setUser(null);
+        setLoading(false);
+        console.log("No user is logged in");
       }
     });
 
@@ -98,7 +117,6 @@ const AuthProvider = ({ children }) => {
     loading,
     createUser,
     logOut,
-   
     signIn,
   };
 

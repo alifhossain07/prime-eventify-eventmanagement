@@ -6,8 +6,24 @@ import Link from "next/link";
 import { IoIosSearch } from "react-icons/io";
 
 const Header = () => {
-// @ts-expect-error:mylifemyrules
+  // @ts-expect-error:mylifemyrules
   const { user, logOut } = useContext(AuthContext);
+
+  // Determine dashboard path based on user role
+  const getDashboardPath = () => {
+    if (!user || !user.role) return "/dashboard"; // fallback
+
+    switch (user.role.toLowerCase()) {
+      case "admin":
+        return "/adminDashboard";
+      case "organizer":
+        return "/organizerDashboard";
+      case "user":
+        return "/userDashboard";
+      default:
+        return "/dashboard"; // fallback for unknown roles
+    }
+  };
 
   return (
     <div className="bg-black text-white">
@@ -21,9 +37,15 @@ const Header = () => {
         <div className="flex items-center gap-10">
           {/* Nav Links */}
           <ul className="flex items-center font-title2 text-xl tracking-wide gap-8">
-            <Link href="/"><li className="hover:text-red-400 cursor-pointer">Home</li></Link>
-            <Link href="/aboutus"><li className="hover:text-red-400 cursor-pointer">About Us</li></Link>
-            <Link href="/events"><li className="hover:text-red-400 cursor-pointer">Events</li></Link>
+            <Link href="/">
+              <li className="hover:text-red-400 cursor-pointer">Home</li>
+            </Link>
+            <Link href="/aboutus">
+              <li className="hover:text-red-400 cursor-pointer">About Us</li>
+            </Link>
+            <Link href="/events">
+              <li className="hover:text-red-400 cursor-pointer">Events</li>
+            </Link>
           </ul>
 
           {/* Search Bar */}
@@ -47,7 +69,11 @@ const Header = () => {
               </Link>
             ) : (
               <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
                   <div className="w-10 rounded-full">
                     <Image
                       src={user?.photoURL || "https://i.ibb.co/KyWtrr4/avatar.jpg"}
@@ -61,13 +87,22 @@ const Header = () => {
                   tabIndex={0}
                   className="mt-3 z-[1] p-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
                 >
-                  <li><span className="font-bold">{user.displayName}</span></li>
-                  <li><span className="text-sm text-gray-500">{user.email}</span></li>
                   <li>
-                    <Link href="/dashboard">Dashboard</Link>
+                    <span className="font-bold">{user.displayName}</span>
                   </li>
                   <li>
-                    <button onClick={logOut} className="text-red-500 hover:text-red-700">Logout</button>
+                    <span className="text-sm text-gray-500">{user.email}</span>
+                  </li>
+                  <li>
+                    <Link href={getDashboardPath()}>Dashboard</Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={logOut}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </div>
