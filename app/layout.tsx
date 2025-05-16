@@ -4,6 +4,7 @@ import { Montserrat, Crimson_Pro, Cutive, Croissant_One, Cantata_One, Bungee } f
 import "./globals.css";
 import Header from "./Components/Shared/Header";
 import Footer from "./Components/Shared/Footer";
+import AuthProvider from "./Providers/AuthProvider";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -55,10 +56,11 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${crimsonPro.variable} ${cutive.variable} ${croissantOne.variable} ${cantataOne.variable} ${bungee.variable} antialiased`}
       >
-        
+        <AuthProvider>
         <Header />
         {children}
         <Footer />
+        </AuthProvider>
              </body>
     </html>
    
