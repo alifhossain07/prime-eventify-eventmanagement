@@ -4,8 +4,12 @@ const nextConfig = {
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'i.ibb.co.com', // Correct domain for ibb.co
+          hostname: 'i.ibb.co.com',  // Correct domain for ibb.co
         },
+        {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
+      },
       ],
     },
   };
