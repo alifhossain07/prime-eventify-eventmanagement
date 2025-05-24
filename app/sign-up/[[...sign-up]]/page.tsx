@@ -2,26 +2,28 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import RegisterImage from "@/public/images/register.webp"; // Adjust the path as necessary
+import RegisterImage from "@/public/images/register.webp";
 import Link from "next/link";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
-  const [role, setRole] = useState("User"); // Default role
-  const roles = ["Admin", "Organizer", "User"]; // Available roles
+  const [role, setRole] = useState("User");
+  const roles = ["Admin", "Organizer", "User"];
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-// @ts-expect-error:mylifemyrules
-  async function registerUser(email, password, name, role, phone, address) {
+  const router = useRouter();
+
+  async function registerUser(email: string, password: string, name: string, role: string, phone: string, address: string) {
     const auth = getAuth();
 
     try {
-      // 1. Register user with Firebase Auth (frontend)
+      // Register user with Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // 2. Send user info with role to your backend to save in MongoDB
+      // Send user info to backend
       const response = await fetch("http://localhost:5000/saveUser", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -45,20 +47,18 @@ const Register = () => {
       throw error;
     }
   }
-// @ts-expect-error:mylifemyrules
-  const handleSubmit = async (e) => {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setError("");
-    setSuccess("");
     setLoading(true);
 
-    // Extract form values
     const formData = new FormData(e.target);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const phone = formData.get("phone");
-    const address = formData.get("address");
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const phone = formData.get("phone") as string;
+    const address = formData.get("address") as string;
 
     if (!name || !email || !password) {
       setError("Name, Email, and Password are required.");
@@ -67,13 +67,21 @@ const Register = () => {
     }
 
     try {
-      // eslint-disable-next-line
-      const result = await registerUser(email, password, name, role, phone, address);
-      setSuccess("Registration successful! You can now log in.");
+      await registerUser(email, password, name, role, phone, address);
       e.target.reset();
-      setRole("User"); // reset role to default
-    } catch (err) {
-      // @ts-expect-error:mylifemyrules
+      setRole("User");
+
+      Swal.fire({
+        icon: "success",
+        title: "Registration and login sucessful!",
+        text: "You can now log in with your credentials.",
+        confirmButtonText: "Go to Homepage",
+      }).then(() => {
+        router.push("/");
+      });
+    }
+     //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch (err: any) {
       setError(err.message || "Registration failed.");
     } finally {
       setLoading(false);
@@ -82,7 +90,6 @@ const Register = () => {
 
   return (
     <div className="flex h-[700px] bg-[#1b1b1b]">
-      {/* Left Section: Full-Screen Image */}
       <div className="w-1/2 h-[700px] relative">
         <Image
           src={RegisterImage}
@@ -92,9 +99,8 @@ const Register = () => {
         />
       </div>
 
-      {/* Right Section: Registration Form */}
       <div className="w-1/2 flex items-center justify-center bg-[#383B39]">
-        <div className="w-10/12 mx-auto  p-8 bg-[#1b1b1b] shadow-lg rounded-lg">
+        <div className="w-10/12 mx-auto p-8 bg-[#1b1b1b] shadow-lg rounded-lg">
           <h2 className="text-3xl font-bold text-red-600 mb-6 text-center">
             Register
           </h2>
@@ -102,20 +108,12 @@ const Register = () => {
           {error && (
             <p className="mb-4 text-red-500 font-semibold text-center">{error}</p>
           )}
-          {success && (
-            <p className="mb-4 text-green-500 font-semibold text-center">{success}</p>
-          )}
 
           <form onSubmit={handleSubmit}>
-            {/* Left Column */}
-            <div className="flex  gap-6">
+            <div className="flex gap-6">
               <div className="w-full md:w-1/2">
-                {/* Name Input */}
                 <div className="mb-4">
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-300"
-                  >
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-300">
                     Full Name
                   </label>
                   <input
@@ -128,12 +126,8 @@ const Register = () => {
                   />
                 </div>
 
-                {/* Email Input */}
                 <div className="mb-4">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-300"
-                  >
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300">
                     Email
                   </label>
                   <input
@@ -146,12 +140,8 @@ const Register = () => {
                   />
                 </div>
 
-                {/* Password Input */}
                 <div className="mb-4">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-gray-300"
-                  >
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-300">
                     Password
                   </label>
                   <input
@@ -165,14 +155,9 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Right Column */}
               <div className="w-full md:w-1/2">
-                {/* Role Selection */}
                 <div className="mb-4">
-                  <label
-                    htmlFor="role"
-                    className="block text-sm font-medium text-gray-300"
-                  >
+                  <label htmlFor="role" className="block text-sm font-medium text-gray-300">
                     Role
                   </label>
                   <select
@@ -183,19 +168,13 @@ const Register = () => {
                     className="w-full mt-2 p-3 bg-[#383B39] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
                   >
                     {roles.map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
+                      <option key={r} value={r}>{r}</option>
                     ))}
                   </select>
                 </div>
 
-                {/* Phone Number Input */}
                 <div className="mb-4">
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-gray-300"
-                  >
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300">
                     Phone Number
                   </label>
                   <input
@@ -207,12 +186,8 @@ const Register = () => {
                   />
                 </div>
 
-                {/* Address Input */}
                 <div className="">
-                  <label
-                    htmlFor="address"
-                    className="block text-sm font-medium text-gray-300"
-                  >
+                  <label htmlFor="address" className="block text-sm font-medium text-gray-300">
                     Address
                   </label>
                   <textarea
@@ -226,7 +201,6 @@ const Register = () => {
               </div>
             </div>
 
-            {/* Register Button (Full Width) */}
             <div className="w-full mt-6">
               <button
                 type="submit"
