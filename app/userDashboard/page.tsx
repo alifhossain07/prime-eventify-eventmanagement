@@ -3,6 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "@/app/Providers/AuthProvider";
+import ProtectedRoute from "../Providers/ProtectedRoute";
 
 const UserDashboard = () => {
       //@ts-expect-error:myLifeMyRules
@@ -128,6 +129,7 @@ const handleCancelEvent = async (eventId: string) => {
   if (!userData) return <p>No user data found.</p>;
 
   return (
+    <ProtectedRoute>
     <div className="bg-gray-900 min-h-screen py-8 px-4 sm:px-8">
       <div className="max-w-4xl mx-auto bg-gray-800 rounded-2xl shadow-2xl p-8">
       
@@ -254,6 +256,7 @@ const handleCancelEvent = async (eventId: string) => {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 };
 

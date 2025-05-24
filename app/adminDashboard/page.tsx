@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import ProtectedRoute from "../Providers/ProtectedRoute";
 
 interface User {
   _id: string;
@@ -89,6 +90,7 @@ export default function AdminDashboard() {
   };
 
   return (
+    <ProtectedRoute>
     <div className="p-8">
       <div className="w-10/12 mx-auto">
         <h1 className="text-3xl font-bold text-red-500 mb-6">Admin Dashboard</h1>
@@ -166,5 +168,6 @@ export default function AdminDashboard() {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
