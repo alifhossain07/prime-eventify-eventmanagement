@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "@/app/Providers/AuthProvider";
 import Image from "next/image";
 import Link from "next/link";
-import { IoIosSearch } from "react-icons/io";
+
 
 const Header = () => {
   // @ts-expect-error:mylifemyrules
@@ -48,14 +48,8 @@ const Header = () => {
             </Link>
           </ul>
 
-          {/* Search Bar */}
-          <div className="relative md:flex hidden">
-            <input
-              className="py-1.5 pr-4 border-2 w-80 bg-gray-100 text-black border-text pl-10 rounded-full outline-none focus:border-[#A72424]"
-              placeholder="Find Event by Category. eg. music"
-            />
-            <IoIosSearch className="absolute top-[9px] left-3 text-[#424242] text-[1.3rem]" />
-          </div>
+       
+          
 
           {/* User Dropdown */}
           <div>
