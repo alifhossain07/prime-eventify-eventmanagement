@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "@/app/Providers/AuthProvider";
 
 const UserDashboard = () => {
+      //@ts-expect-error:myLifeMyRules
   const { user } = useContext(AuthContext);
   const email = user?.email;
 
@@ -38,11 +39,16 @@ const UserDashboard = () => {
         setAddress(dataUser.address || "");
 
         // Fetch registered events for the user
-        const resEvents = await fetch(`http://localhost:5000/events/registered?email=${email}`);
+      
+const resEvents = await fetch(`http://localhost:5000/registeredEvents?email=${email}`);
+
         if (!resEvents.ok) throw new Error("Failed to fetch registered events");
         const dataEvents = await resEvents.json();
         setEvents(dataEvents);
-      } catch (err: any) {
+
+      }
+       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      catch (err: any) {
         Swal.fire("Error", err.message || "Unknown error", "error");
       } finally {
         setLoading(false);
@@ -69,14 +75,51 @@ const UserDashboard = () => {
         throw new Error(errorData.message || "Failed to update user");
       }
 
-      const data = await res.json();
+    //   const data = await res.json();
+      
+        //@ts-expect-error:myLifeMyRules
       setUserData((prev) => ({ ...prev, name, phone, address }));
       setIsEditing(false);
       Swal.fire("Success", "User info updated successfully", "success");
-    } catch (err: any) {
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any 
+    catch (err: any) {
       Swal.fire("Error", err.message || "Unknown error", "error");
     }
   };
+
+//   Cancel Event
+const handleCancelEvent = async (eventId: string) => {
+  const result = await Swal.fire({
+    title: "Are you sure?",
+    text: "Do you really want to cancel this event?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, cancel it!",
+  });
+
+  if (result.isConfirmed) {
+    try {
+      const res = await fetch(`http://localhost:5000/registeredEvents/${eventId}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to cancel event");
+      }
+
+      // Remove the event from state
+      setEvents((prevEvents) => prevEvents.filter((event) => event._id !== eventId));
+
+      Swal.fire("Cancelled!", "The event has been cancelled.", "success");
+    } catch (err: any) {
+      Swal.fire("Error", err.message || "Something went wrong", "error");
+    }
+  }
+};
 
   if (loading) return <p>Loading user data...</p>;
   if (!userData) return <p>No user data found.</p>;
@@ -84,7 +127,9 @@ const UserDashboard = () => {
   return (
     <div className="bg-gray-900 min-h-screen py-8 px-4 sm:px-8">
       <div className="max-w-4xl mx-auto bg-gray-800 rounded-2xl shadow-2xl p-8">
+      
         <h1 className="text-4xl font-extrabold mb-8 text-center text-red-600">
+            {/* @ts-expect-error:myLifeMyRules */}
           Welcome, {userData.name || "User"}!
         </h1>
 
@@ -96,9 +141,13 @@ const UserDashboard = () => {
             <h2 className="text-2xl font-semibold mb-6">Personal Information</h2>
             {!isEditing ? (
               <div className="space-y-4">
+                {/* @ts-expect-error:myLifeMyRules */}
                 <p><strong>Email:</strong> {userData.email}</p>
+                {/* @ts-expect-error:myLifeMyRules */}
                 <p><strong>Name:</strong> {userData.name || "N/A"}</p>
+                {/* @ts-expect-error:myLifeMyRules */}
                 <p><strong>Phone:</strong> {userData.phone || "N/A"}</p>
+                {/* @ts-expect-error:myLifeMyRules */}
                 <p><strong>Address:</strong> {userData.address || "N/A"}</p>
                 <button
                   onClick={() => setIsEditing(true)}
@@ -152,8 +201,11 @@ const UserDashboard = () => {
                   <button
                     type="button"
                     onClick={() => {
+                        {/* @ts-expect-error:myLifeMyRules */}
                       setName(userData.name || "");
+                      {/* @ts-expect-error:myLifeMyRules */}
                       setPhone(userData.phone || "");
+                      {/* @ts-expect-error:myLifeMyRules */}
                       setAddress(userData.address || "");
                       setIsEditing(false);
                     }}
@@ -174,15 +226,25 @@ const UserDashboard = () => {
             <p className="text-lg">You have no registered events yet.</p>
           ) : (
             <div className="space-y-6">
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
               {events.map((event: any) => (
                 <div
-                  key={event._id}
-                  className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition"
-                >
-                  <h3 className="text-lg font-bold text-red-500">{event.title}</h3>
-                  <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
-                  <p><strong>Location:</strong> {event.location}</p>
-                </div>
+  key={event._id}
+  className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition flex justify-between items-start gap-4"
+>
+  <div>
+    <h3 className="text-lg font-bold text-red-500">{event.eventTitle}</h3>
+    <p><strong>Price:</strong> ৳{event.price}</p>
+    <p><strong>Payment Number:</strong> {event.demoPaymentNumber}</p>
+    <p><strong>Booking Date:</strong> {new Date(event.bookedAt).toLocaleString()}</p>
+  </div>
+  <button
+    onClick={() => handleCancelEvent(event._id)}
+    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
+  >
+    Cancel
+  </button>
+</div>
               ))}
             </div>
           )}

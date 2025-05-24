@@ -1,7 +1,14 @@
-// app/events/[id]/page.tsx
+'use client';
 
-import { notFound } from "next/navigation";
-import Image from "next/image";
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '@/app/Providers/AuthProvider';
+ // adjust path
+
+const MySwal = withReactContent(Swal);
 
 interface Event {
   id: number;
@@ -22,22 +29,99 @@ interface Event {
   image: string;
 }
 
-export async function generateStaticParams() {
-  const res = await fetch("http://localhost:5000/eventdata");
-  const data: Event[] = await res.json();
+export default function EventDetails({ params }: { params: { id: string } }) {
+  const [event, setEvent] = useState<Event | null>(null);
+  const { user } = useContext(AuthContext);
+const [userRole, setUserRole] = useState<string | null>(null);
 
-  return data.map((event) => ({ id: event.id.toString() }));
-}
+useEffect(() => {
+  const fetchUserRole = async () => {
+    if (user?.email) {
+      try {
+        const res = await fetch(`http://localhost:5000/users/getUserRole?email=${user.email}`);
+        const data = await res.json();
+        setUserRole(data.role); // role = 'user', 'admin', or 'organizer'
+      } catch (err) {
+        console.error('Error fetching user role:', err);
+      }
+    }
+  };
 
-export default async function EventDetails({ params }: { params: { id: string } }) {
-  const res = await fetch("http://localhost:5000/eventdata");
-  const events: Event[] = await res.json();
-  const event = events.find((e) => e.id.toString() === params.id);
+  fetchUserRole();
+}, [user?.email]);
 
-  if (!event) return notFound();
+
+  useEffect(() => {
+    const fetchEvent = async () => {
+      const res = await fetch('http://localhost:5000/eventdata');
+      const events: Event[] = await res.json();
+      const found = events.find((e) => e.id.toString() === params.id);
+      if (!found) return notFound();
+      setEvent(found);
+    };
+
+    fetchEvent();
+  }, [params.id]);
+
+  if (!event) return <div className="text-center py-20 text-white">Loading...</div>;
+
+  const handleBooking = async () => {
+  if (!user) {
+    Swal.fire('Login Required', 'Please log in to book the event.', 'info');
+    return;
+  }
+
+  if (userRole === 'Organizer') {
+    Swal.fire('Access Denied', 'Organizers cannot book events.', 'warning');
+    return;
+  }
+
+  const confirm = await MySwal.fire({
+    title: `Book "${event.eventTitle}"?`,
+    html: `Ticket Price: <strong>$${event.ticketPrice}</strong>`,
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Proceed to Payment',
+    cancelButtonText: 'Cancel',
+  });
+
+  if (confirm.isConfirmed) {
+    const { value: phone } = await MySwal.fire({
+      title: 'Enter your payment number',
+      input: 'tel',
+      inputPlaceholder: 'e.g. 017XXXXXXXX',
+      confirmButtonText: 'Complete Payment',
+      showCancelButton: true,
+    });
+
+    if (phone) {
+      await MySwal.fire({
+        title: 'Payment Completed!',
+        text: 'Your ticket has been booked.',
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+      const registeredEvent = {
+        eventId: event.id,
+        eventTitle: event.eventTitle,
+        price: event.ticketPrice,
+        demoPaymentNumber: phone,
+        userEmail: user.email,
+      };
+
+      await fetch('http://localhost:5000/bookEvent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(registeredEvent),
+      });
+    }
+  }
+};
 
   return (
-    <div className="min-h-screen  text-white px-4 py-10">
+    <div className="min-h-screen text-white px-4 py-10">
       <div className="max-w-6xl mx-auto bg-gray-900 rounded-2xl overflow-hidden shadow-2xl border border-red-600">
         <Image
           src={event.image}
@@ -78,7 +162,7 @@ export default async function EventDetails({ params }: { params: { id: string } 
                 <span className="font-semibold text-white">Price:</span> ${event.ticketPrice}
               </p>
               <p className="text-lg text-gray-400">
-                <span className="font-semibold text-white">Featured:</span> {event.featuredEvent ? "Yes" : "No"}
+                <span className="font-semibold text-white">Featured:</span> {event.featuredEvent ? 'Yes' : 'No'}
               </p>
             </div>
           </div>
@@ -89,6 +173,14 @@ export default async function EventDetails({ params }: { params: { id: string } 
               {event.DetailedDescription}
             </p>
           </div>
+
+          <button
+           
+            onClick={handleBooking}
+            className="mt-10 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition"
+          >
+            Book this Event
+          </button>
         </div>
       </div>
     </div>

@@ -3,12 +3,30 @@ import React, { useContext } from "react";
 import { AuthContext } from "@/app/Providers/AuthProvider";
 import Image from "next/image";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 
 const Header = () => {
   // @ts-expect-error:mylifemyrules
   const { user, logOut } = useContext(AuthContext);
 
+  const handleLogout = () => {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you really want to log out?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, log out',
+    cancelButtonText: 'No, stay logged in'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      logOut();
+      Swal.fire('Logged Out', 'You have been logged out successfully.', 'success');
+    }
+  });
+};
   // Determine dashboard path based on user role
   const getDashboardPath = () => {
     if (!user || !user.role) return "/dashboard"; // fallback
@@ -104,7 +122,7 @@ const Header = () => {
 
     <li>
       <button
-        onClick={logOut}
+        onClick={handleLogout}
         className="w-full text-left px-4 py-2 rounded-md text-red-600 font-semibold hover:bg-red-50 hover:text-red-700 transition"
         role="menuitem"
       >
