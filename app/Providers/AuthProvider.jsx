@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
   // Helper to fetch user role from your backend
   const fetchUserRole = async (email) => {
     try {
-      const res = await fetch(`http://localhost:5000/users/getUserRole?email=${encodeURIComponent(email)}`);
+      const res = await fetch(`https://prime-eventify-server.vercel.app/users/getUserRole?email=${encodeURIComponent(email)}`);
       if (!res.ok) throw new Error("Failed to fetch user role");
       const data = await res.json();
       return data.role; // expected: "admin" | "user" | "organizer"

@@ -23,11 +23,11 @@ export default function AdminDashboard() {
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/users/")
+    fetch("https://prime-eventify-server.vercel.app/users/")
       .then((res) => res.json())
       .then(setUsers);
 
-    fetch("http://localhost:5000/eventdata/")
+    fetch("https://prime-eventify-server.vercel.app/eventdata/")
       .then((res) => res.json())
       .then(setEvents);
   }, []);
@@ -44,7 +44,7 @@ export default function AdminDashboard() {
 
     if (result.isConfirmed) {
       try {
-        const res = await fetch(`http://localhost:5000/users/${id}`, {
+        const res = await fetch(`https://prime-eventify-server.vercel.app/users/${id}`, {
           method: "DELETE",
         });
 
@@ -72,7 +72,7 @@ export default function AdminDashboard() {
 
     if (result.isConfirmed) {
       try {
-        const res = await fetch(`http://localhost:5000/eventdata/${id}`, {
+        const res = await fetch(`https://prime-eventify-server.vercel.app/eventdata/${id}`, {
           method: "DELETE",
         });
 

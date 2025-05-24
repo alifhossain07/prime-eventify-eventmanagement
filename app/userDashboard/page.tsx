@@ -29,7 +29,7 @@ const UserDashboard = () => {
         setLoading(true);
 
         // Fetch user details
-        const resUser = await fetch(`http://localhost:5000/users/user?email=${email}`);
+        const resUser = await fetch(`https://prime-eventify-server.vercel.app/users/user?email=${email}`);
         if (!resUser.ok) throw new Error("Failed to fetch user data from backend");
         const dataUser = await resUser.json();
 
@@ -40,7 +40,7 @@ const UserDashboard = () => {
 
         // Fetch registered events for the user
       
-const resEvents = await fetch(`http://localhost:5000/registeredEvents?email=${email}`);
+const resEvents = await fetch(`https://prime-eventify-server.vercel.app/registeredEvents?email=${email}`);
 
         if (!resEvents.ok) throw new Error("Failed to fetch registered events");
         const dataEvents = await resEvents.json();
@@ -62,7 +62,7 @@ const resEvents = await fetch(`http://localhost:5000/registeredEvents?email=${em
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/users/user", {
+      const res = await fetch("https://prime-eventify-server.vercel.app/users/user", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -102,7 +102,7 @@ const handleCancelEvent = async (eventId: string) => {
 
   if (result.isConfirmed) {
     try {
-      const res = await fetch(`http://localhost:5000/registeredEvents/${eventId}`, {
+      const res = await fetch(`https://prime-eventify-server.vercel.app/registeredEvents/${eventId}`, {
         method: "DELETE",
       });
 

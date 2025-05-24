@@ -41,7 +41,7 @@ const UpcomingEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/eventdata");
+        const response = await axios.get("https://prime-eventify-server.vercel.app/eventdata");
         setEvents(response.data);
       } catch (error) {
         console.error(error);

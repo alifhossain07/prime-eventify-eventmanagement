@@ -68,7 +68,7 @@ export default function OrganizerDashboard() {
   const fetchEvents = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/eventdata");
+      const res = await fetch("https://prime-eventify-server.vercel.app/eventdata");
       const data = await res.json();
       // Filter events by logged in user email
       const filtered = data.filter(
@@ -121,13 +121,13 @@ export default function OrganizerDashboard() {
     try {
       let res;
       if (isEdit && editId) {
-        res = await fetch(`http://localhost:5000/eventdata/${editId}`, {
+        res = await fetch(`https://prime-eventify-server.vercel.app/eventdata/${editId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newEvent),
         });
       } else {
-        res = await fetch("http://localhost:5000/eventdata", {
+        res = await fetch("https://prime-eventify-server.vercel.app/eventdata", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newEvent),
@@ -162,7 +162,7 @@ export default function OrganizerDashboard() {
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this event?")) {
       try {
-        const res = await fetch(`http://localhost:5000/eventdata/${id}`, {
+        const res = await fetch(`https://prime-eventify-server.vercel.app/eventdata/${id}`, {
           method: "DELETE",
         });
         if (res.ok) {

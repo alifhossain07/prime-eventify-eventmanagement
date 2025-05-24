@@ -39,7 +39,7 @@ useEffect(() => {
   const fetchUserRole = async () => {
     if (user?.email) {
       try {
-        const res = await fetch(`http://localhost:5000/users/getUserRole?email=${user.email}`);
+        const res = await fetch(`https://prime-eventify-server.vercel.app/users/getUserRole?email=${user.email}`);
         const data = await res.json();
         setUserRole(data.role); // role = 'user', 'admin', or 'organizer'
       } catch (err) {
@@ -54,7 +54,7 @@ useEffect(() => {
 
   useEffect(() => {
     const fetchEvent = async () => {
-      const res = await fetch('http://localhost:5000/eventdata');
+      const res = await fetch('https://prime-eventify-server.vercel.app/eventdata');
       const events: Event[] = await res.json();
       const found = events.find((e) => e.id.toString() === params.id);
       if (!found) return notFound();
@@ -112,7 +112,7 @@ useEffect(() => {
         userEmail: user.email,
       };
 
-      await fetch('http://localhost:5000/bookEvent', {
+      await fetch('https://prime-eventify-server.vercel.app/bookEvent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(registeredEvent),

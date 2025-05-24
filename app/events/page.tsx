@@ -36,7 +36,7 @@ export default function EventsPage() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch("http://localhost:5000/eventdata");
+        const res = await fetch("https://prime-eventify-server.vercel.app/eventdata");
         const data = await res.json();
         setEvents(data);
         setFilteredEvents(data);
