@@ -62,44 +62,59 @@ const Header = () => {
                 </button>
               </Link>
             ) : (
-              <div className="dropdown dropdown-end">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle avatar"
-                >
-                  <div className="w-10 rounded-full">
-                    <Image
-                      src={user?.photoURL || "https://i.ibb.co/KyWtrr4/avatar.jpg"}
-                      alt="User Avatar"
-                      width={40}
-                      height={40}
-                    />
-                  </div>
-                </div>
-                <ul
-                  tabIndex={0}
-                  className="mt-3 z-[1] p-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-                >
-                  <li>
-                    <span className="font-bold">{user.displayName}</span>
-                  </li>
-                  <li>
-                    <span className="text-sm text-gray-500">{user.email}</span>
-                  </li>
-                  <li>
-                    <Link href={getDashboardPath()}>Dashboard</Link>
-                  </li>
-                  <li>
-                    <button
-                      onClick={logOut}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </div>
+              <div className="dropdown dropdown-end relative">
+  <div
+    tabIndex={0}
+    role="button"
+    className="btn btn-ghost btn-circle avatar ring-1 ring-gray-300 hover:ring-blue-600 focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out focus:outline-none"
+    aria-label="User menu"
+  >
+    <div className="w-9 h-9 rounded-full overflow-hidden border border-gray-200">
+      <Image
+        src={user?.photoURL || "https://i.ibb.co/KyWtrr4/avatar.jpg"}
+        alt="User Avatar"
+        width={36}
+        height={36}
+        className="object-cover"
+        priority
+      />
+    </div>
+  </div>
+
+  <ul
+    tabIndex={0}
+    className="dropdown-content menu bg-white rounded-lg shadow-md w-64 mt-3 p-5 space-y-4 text-gray-900 ring-1 ring-black ring-opacity-5 z-50"
+  >
+    {/* User Info */}
+    <li className="border-b border-gray-200 pb-4">
+      <p className="text-base font-semibold truncate">{user?.displayName || "Unnamed User"}</p>
+      <p className="text-sm text-gray-500 truncate select-text">{user?.email}</p>
+    </li>
+
+    {/* Actions */}
+    <li>
+      <Link
+        href={getDashboardPath()}
+        className="block px-4 py-2 rounded-md text-gray-800 hover:bg-blue-50 hover:text-blue-600 font-medium transition"
+        role="menuitem"
+      >
+        Dashboard
+      </Link>
+    </li>
+
+    <li>
+      <button
+        onClick={logOut}
+        className="w-full text-left px-4 py-2 rounded-md text-red-600 font-semibold hover:bg-red-50 hover:text-red-700 transition"
+        role="menuitem"
+      >
+        Logout
+      </button>
+    </li>
+  </ul>
+</div>
+
+
             )}
           </div>
         </div>

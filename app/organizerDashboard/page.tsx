@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import ProtectedRoute from "../Providers/ProtectedRoute";
 
 interface Event {
   _id?: string;
@@ -175,6 +176,7 @@ export default function OrganizerDashboard() {
   };
 
   return (
+    <ProtectedRoute>
     <div className="min-h-screen bg-black text-white px-6 py-10">
       <h1 className="text-4xl font-bold text-center text-red-500 mb-10">
         Organizer Dashboard
@@ -343,5 +345,6 @@ export default function OrganizerDashboard() {
         </div>
       )}
     </div>
+    </ProtectedRoute>
   );
 }
