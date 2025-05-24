@@ -21,13 +21,13 @@ const teamMembers = [
 {
   name: "Ashraful Alam",
   role: "Head of Marketing",
-  img: "/images/team-3.jpg",
+  img: "https://i.ibb.co/GvxVSxjM/3.png",
   bio: "Crafts and leads impactful marketing strategies to grow the brand."
 },
 {
   name: "Tafhim Ovi",
   role: "Logistics Manager",
-  img: "/images/team-3.jpg",
+  img: "https://i.ibb.co/hxJ9wGcT/4.png",
   bio: "Manages logistics to ensure timely and efficient delivery operations."
 }
 

@@ -3,6 +3,7 @@ import React from "react";
 import HostEvent from "@/public/images/hostevent.webp";
 import JoinEvent from "@/public/images/joinevent.webp";
 
+
 const Features = () => {
   return (
     <div className="py-24">
@@ -44,6 +45,8 @@ const Features = () => {
                 Organize Now 
               </button>
             </div>
+
+       
 
             {/*  bottom shadow  */}
             <div className="w-full opacity-0 z-[-1] group-hover:opacity-100 group-hover:z-10 transition-all duration-500 bg-gradient-to-b from-[rgb(0,0,0,0.001)] to-[rgb(0,0,0,0.5)] h-[100%] absolute bottom-0 left-0 right-0"></div>
