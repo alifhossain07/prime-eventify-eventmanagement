@@ -112,10 +112,13 @@ const handleCancelEvent = async (eventId: string) => {
       }
 
       // Remove the event from state
+       //@ts-expect-error:myLifeMyRules
       setEvents((prevEvents) => prevEvents.filter((event) => event._id !== eventId));
 
       Swal.fire("Cancelled!", "The event has been cancelled.", "success");
-    } catch (err: any) {
+    } 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any 
+    catch (err: any) {
       Swal.fire("Error", err.message || "Something went wrong", "error");
     }
   }

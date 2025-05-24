@@ -89,7 +89,7 @@ const Header = () => {
   >
     <div className="w-9 h-9 rounded-full overflow-hidden border border-gray-200">
       <Image
-        src={user?.photoURL || "https://i.ibb.co/KyWtrr4/avatar.jpg"}
+        src={user?.photoURL || "https://i.ibb.co/x8tv8qFL/image.png"}
         alt="User Avatar"
         width={36}
         height={36}

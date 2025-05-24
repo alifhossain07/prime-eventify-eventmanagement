@@ -54,7 +54,7 @@ export default function AdminDashboard() {
         } else {
           Swal.fire("Error!", "Failed to delete user.", "error");
         }
-      } catch (error) {
+      } catch  {
         Swal.fire("Error!", "Failed to delete user.", "error");
       }
     }
@@ -82,7 +82,7 @@ export default function AdminDashboard() {
         } else {
           Swal.fire("Error!", "Failed to delete event.", "error");
         }
-      } catch (error) {
+      } catch  {
         Swal.fire("Error!", "Failed to delete event.", "error");
       }
     }

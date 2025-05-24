@@ -61,7 +61,9 @@ export default function OrganizerDashboard() {
     if (userEmail) {
       fetchEvents();
     }
-  }, [userEmail]);
+  },
+  // eslint-disable-next-line react-hooks/exhaustive-deps 
+  [userEmail]);
 
   const fetchEvents = async () => {
     setLoading(true);

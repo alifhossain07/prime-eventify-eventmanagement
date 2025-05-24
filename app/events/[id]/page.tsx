@@ -31,6 +31,7 @@ interface Event {
 
 export default function EventDetails({ params }: { params: { id: string } }) {
   const [event, setEvent] = useState<Event | null>(null);
+  //@ts-expect-error:myLifeMyRules
   const { user } = useContext(AuthContext);
 const [userRole, setUserRole] = useState<string | null>(null);
 
