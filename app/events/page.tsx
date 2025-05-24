@@ -5,6 +5,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import ProtectedRoute from "../Providers/ProtectedRoute";
 
 interface Event {
   id: number;
@@ -57,6 +58,7 @@ export default function EventsPage() {
   };
 
   return (
+    <ProtectedRoute>
     <div className="  text-white px-4 py-8">
       <h1 className="text-4xl font-bold text-center text-red-500 mb-6">
         All Events
@@ -110,5 +112,6 @@ export default function EventsPage() {
         ))}
       </div>
     </div>
+    </ProtectedRoute>
   );
 }

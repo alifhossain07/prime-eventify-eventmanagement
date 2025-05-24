@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import HostEvent from "@/public/images/hostevent.webp";
 import JoinEvent from "@/public/images/joinevent.webp";
+import Link from "next/link";
 
 
 const Features = () => {
@@ -41,9 +42,11 @@ const Features = () => {
                 Bring your vision to life by creating and managing unforgettable
                 events.
               </p>
+              <Link href="/sign-up">
               <button className="bg-red-500 z-[1-] opacity-0 cursor-pointer group-hover:z-20 group-hover:opacity-100  px-4 py-3 mt-3 hover:bg-transparent font-title2 transition-all duration-1000 text-white rounded-md text-[0.9rem]  relative shadow-lg before:absolute before:top-0 before:left-0 before:w-0 before:h-0 before:border-l-[4px] before:border-t-[4px] before:border-transparent hover:before:w-full hover:before:h-full hover:before:border-red-500 hover:before:transition-all  hover:before:duration-1000 after:border-r-[4px] after:border-b-[4px] after:border-transparent hover:after:border-red-500 after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0 hover:after:w-full hover:after:h-full hover:after:transition-all hover:after:duration-1000">
                 Organize Now 
               </button>
+              </Link>
             </div>
 
        
@@ -76,9 +79,11 @@ const Features = () => {
               <p className="text-center z-[1-] opacity-0 group-hover:z-20 group-hover:opacity-100 transition-all duration-700 text-white w-10/12 mx-auto text-[1rem]">
                 Dive into exciting events and be part of the fun and excitement!
               </p>
+              <Link href="/sign-up">
               <button className="bg-red-500 z-[1-] cursor-pointer opacity-0 group-hover:z-20 group-hover:opacity-100  px-4 py-3 mt-3 hover:bg-transparent font-title2 transition-all duration-1000 text-white rounded-md text-[0.9rem]  relative shadow-lg before:absolute before:top-0 before:left-0 before:w-0 before:h-0 before:border-l-[4px] before:border-t-[4px] before:border-transparent hover:before:w-full hover:before:h-full hover:before:border-red-500 hover:before:transition-all  hover:before:duration-1000 after:border-r-[4px] after:border-b-[4px] after:border-transparent hover:after:border-red-500 after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0 hover:after:w-full hover:after:h-full hover:after:transition-all hover:after:duration-1000">
               Explore Events
               </button>
+              </Link>
             </div>
 
             {/*  bottom shadow  */}

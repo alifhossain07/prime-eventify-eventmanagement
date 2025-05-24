@@ -56,7 +56,7 @@ const UpcomingEvents = () => {
 
   return (
     <div
-      className="bg-cover py-24 bg-center h-[1700px] lg:h-[800px] items-start justify-center transition-opacity duration-300"
+      className="bg-cover py-24 bg-center h-[1700px] lg:h-[900px] items-start justify-center transition-opacity duration-300"
       style={{
         backgroundImage: `url(${UpcomingEventsBg.src})`,
         backgroundAttachment: "fixed",
