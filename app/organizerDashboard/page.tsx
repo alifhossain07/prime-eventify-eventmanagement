@@ -257,7 +257,7 @@ export default function OrganizerDashboard() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 px-4">
+        <div className="fixed inset-0 bg-black/80 bg-opacity-70 flex justify-center items-center z-50 px-4">
           <div className="bg-gray-900 p-8 rounded-xl max-w-lg w-full relative border border-red-600">
             <button
               onClick={() => setShowModal(false)}

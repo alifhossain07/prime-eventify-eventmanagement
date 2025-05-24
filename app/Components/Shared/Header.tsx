@@ -105,8 +105,8 @@ const Header = () => {
   >
     {/* User Info */}
     <li className="border-b border-gray-200 pb-4">
-      <p className="text-base font-semibold truncate">{user?.displayName || "Unnamed User"}</p>
-      <p className="text-sm text-gray-500 truncate select-text">{user?.email}</p>
+      
+      <p className="text-md text-gray-500 truncate select-text">{user?.email}</p>
     </li>
 
     {/* Actions */}
